@@ -21,7 +21,13 @@ io.on('connection', function(socket) {
 
     socket.on('translate', async (translateObject) => {
         let translatedText = await translateText(translateObject.text, translateObject.target);
-        socket.emit('onTranslation', translatedText);
+        let translatedObject = {
+            from: 'English',
+            to: translateObject.target,
+            original: translateObject.text,
+            translated: translatedText
+        }
+        socket.emit('onTranslation', translatedObject);
     });
 });
 

@@ -4,7 +4,7 @@ import { io } from 'socket.io-client';
 interface translation {
   from: string;
   to: string;
-  orignal: string;
+  original: string;
   translated: string;
 }
 
@@ -20,11 +20,13 @@ export class AppComponent {
 
   text: string = '';
   target: string = '';
+  
   translated: string = '';
-  translations: any[] = []
+  translations: translation[] = []
 
   ngOnInit(): void {
     this.socket = io();
+    this.listenToEvents();
   };
 
   requestTranslation() {
@@ -32,16 +34,29 @@ export class AppComponent {
       text: this.text,
       target: this.target    
     }
-    console.log(translateObject);
     this.socket.emit('translate', translateObject);
 
-    this.socket.on('onTranslation', (translatedText: any) => {
-      this.translations.push({
-        from: 'EN',
-        to: this.target,
-        orignal: this.text,
-        translated: translatedText
-      });
+    this.text = '';
+    this.target = '';
+  }
+
+  listenToEvents() {
+    this.socket.on('onTranslation', (translatedObject: translation) => {
+      if (translatedObject.to == 'MR') {
+        translatedObject.to = 'Marathi'; 
+      } else if (translatedObject.to == 'HI') {
+        translatedObject.to = 'Hindi';
+      } else if (translatedObject.to == 'ZH') {
+        translatedObject.to = 'Chinese';
+      } else if (translatedObject.to == 'FR') {
+        translatedObject.to = 'French';
+      } else if (translatedObject.to == 'ES') {
+        translatedObject.to = 'Spanish';
+      } else {
+        translatedObject.to = 'Sweedish'
+      }
+
+      this.translations.push(translatedObject);
     });
   }
 }

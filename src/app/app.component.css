@@ -8,6 +8,14 @@
     border: #483eff !important;
 }
 
+.row {
+    margin-top: 45px !important;
+}
+
+.card {
+    margin-top: 25px !important;
+}
+
 .img-cont {
     text-align: center;
 }
