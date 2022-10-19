@@ -1,0 +1,30 @@
+<div class="section container">
+    <form>
+        <div class="mb-3">
+            <label for="text" class="form-label" >Text To Translate</label>
+            <input type="text" class="form-control" id="text" name="text" placeholder="Hello" [(ngModel)]="text">
+        </div>
+        <div class="mb-3">
+            <label for="target" class="form-label">Translate To</label>
+            <select class="form-select" id="target" name="target" [(ngModel)]="target">
+                <option value="mr">Marathi</option>
+                <option value="hi">Hindi</option>
+                <option value="zh">Chinese</option>
+                <option value="fr">French</option>
+                <option value="es">Spanish</option>
+                <option value="sv">Sweedish</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="requestTranslation()">Translate</button>
+    </form>
+    <div class="row" *ngFor="let translation of translations; let i = index">
+        <div class="col-sm-5">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Translated From {{translation.from}} To {{translation.to}}</h5>
+              <p class="card-text">{{translation.original}} --> {{translation.translated}}</p>
+            </div>
+          </div>
+        </div>
+    </div>    
+</div>
