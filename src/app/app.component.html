@@ -21,16 +21,29 @@
               <option value="SV">Sweedish</option>
           </select>
       </div>
+      <div class="mb-3">
+        <label for="target2" class="form-label">And</label>
+          <select class="form-select" id="target2" name="target2" [(ngModel)]="target2">
+            <option selected>Select a Language</option>
+            <option value="MR">Marathi</option>
+            <option value="HI">Hindi</option>
+            <option value="ZH">Chinese</option>
+            <option value="FR">French</option>
+            <option value="ES">Spanish</option>
+            <option value="SV">Sweedish</option>
+        </select>
+      </div>
       <button type="submit" class="btn btn-primary" (click)="requestTranslation()">Translate</button>
   </form>
     <div class="row">       
       <div class="g-col-6" *ngFor="let translation of translations; let i = index">
           <div class="card">
             <div class="card-body">
-              <h3 class="card-title">Translated From English To {{translation.to}}</h3>
+              <h3 class="card-title">Translated From English To {{translation.to}} and {{translation.to2}}</h3>
               <div class="card-text">
                 <h4 class="card-text">Original: {{translation.original}}</h4>
-                <h4 class="card-text">Translated: {{translation.translated}}</h4> 
+                <h4 class="card-text">Translated To {{translation.to}}: {{translation.translated}}</h4>
+                <h4>Translated To {{translation.to2}}: {{translation.translated2}}</h4>
               </div>
             </div>
           </div>

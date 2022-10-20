@@ -4,8 +4,10 @@ import { io } from 'socket.io-client';
 interface translation {
   from: string;
   to: string;
+  to2: string;
   original: string;
   translated: string;
+  translated2: string;
 }
 
 @Component({
@@ -20,6 +22,7 @@ export class AppComponent {
 
   text: string = ' ';
   target: string = 'Select a Language';
+  target2: string = 'Select a Language'
   
   translated: string = ' ';
   translations: translation[] = []
@@ -30,19 +33,16 @@ export class AppComponent {
   };
 
   requestTranslation() {
-    if (this.text != ' ' && this.target != 'Select a Language') {
-      let translateObject = {
-        text: this.text,
-        target: this.target    
-      }
-      this.socket.emit('translate', translateObject);
-  
-      this.text = '';
-      this.target = 'Select a Language'; 
+    let translateObject = {
+      text: this.text,
+      target: this.target,
+      target2: this.target2
     }
-    
+    this.socket.emit('translate', translateObject);
+
     this.text = '';
     this.target = 'Select a Language'; 
+    this.target2 = 'Select a Language'
   }
 
   listenToEvents() {
@@ -59,6 +59,20 @@ export class AppComponent {
         translatedObject.to = 'Spanish';
       } else {
         translatedObject.to = 'Sweedish'
+      }
+
+      if (translatedObject.to2 == 'MR') {
+        translatedObject.to2 = 'Marathi'; 
+      } else if (translatedObject.to2 == 'HI') {
+        translatedObject.to2 = 'Hindi';
+      } else if (translatedObject.to2 == 'ZH') {
+        translatedObject.to2 = 'Chinese';
+      } else if (translatedObject.to2 == 'FR') {
+        translatedObject.to2 = 'French';
+      } else if (translatedObject.to2 == 'ES') {
+        translatedObject.to2 = 'Spanish';
+      } else {
+        translatedObject.to2 = 'Sweedish'
       }
 
       this.translations.push(translatedObject);
