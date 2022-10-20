@@ -18,10 +18,10 @@ export class AppComponent {
 
   socket:any;
 
-  text: string = '';
-  target: string = '';
+  text: string = ' ';
+  target: string = 'Select a Language';
   
-  translated: string = '';
+  translated: string = ' ';
   translations: translation[] = []
 
   ngOnInit(): void {
@@ -30,14 +30,19 @@ export class AppComponent {
   };
 
   requestTranslation() {
-    let translateObject = {
-      text: this.text,
-      target: this.target    
+    if (this.text != ' ' && this.target != 'Select a Language') {
+      let translateObject = {
+        text: this.text,
+        target: this.target    
+      }
+      this.socket.emit('translate', translateObject);
+  
+      this.text = '';
+      this.target = 'Select a Language'; 
     }
-    this.socket.emit('translate', translateObject);
-
+    
     this.text = '';
-    this.target = '';
+    this.target = 'Select a Language'; 
   }
 
   listenToEvents() {

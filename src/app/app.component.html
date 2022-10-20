@@ -1,30 +1,36 @@
 <div class="section container">
-    <form>
-        <div class="mb-3">
-            <label for="text" class="form-label" >Text To Translate</label>
-            <input type="text" class="form-control" id="text" name="text" placeholder="Hello" [(ngModel)]="text">
-        </div>
-        <div class="mb-3">
-            <label for="target" class="form-label">Translate To</label>
-            <select class="form-select" id="target" name="target" [(ngModel)]="target">
-                <option value="MR">Marathi</option>
-                <option value="HI">Hindi</option>
-                <option value="ZH">Chinese</option>
-                <option value="FR">French</option>
-                <option value="ES">Spanish</option>
-                <option value="SV">Sweedish</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary" (click)="requestTranslation()">Translate</button>
-    </form>
-    <div class="row">
-        <div class="g-col-6" *ngFor="let translation of translations; let i = index">
+  <div class="jumbotron text-center">
+      <hr>
+      <h1>Translation App</h1>
+      <hr>
+  </div>
+  <form class="form">
+      <div class="mb-3">
+          <label for="text" class="form-label" >Text To Translate</label>
+          <input type="text" class="form-control" id="text" name="text" placeholder="Hello" [(ngModel)]="text">
+      </div>
+      <div class="mb-3">
+          <label for="target" class="form-label">Translate To</label>
+          <select class="form-select" id="target" name="target" [(ngModel)]="target">
+              <option selected>Select a Language</option>
+              <option value="MR">Marathi</option>
+              <option value="HI">Hindi</option>
+              <option value="ZH">Chinese</option>
+              <option value="FR">French</option>
+              <option value="ES">Spanish</option>
+              <option value="SV">Sweedish</option>
+          </select>
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="requestTranslation()">Translate</button>
+  </form>
+    <div class="row">       
+      <div class="g-col-6" *ngFor="let translation of translations; let i = index">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Translated From English To {{translation.to}}</h5>
+              <h3 class="card-title">Translated From English To {{translation.to}}</h3>
               <div class="card-text">
-                <p class="card-text">Original: {{translation.original}}</p>
-                <p class="card-text">Translated: {{translation.translated}}</p> 
+                <h4 class="card-text">Original: {{translation.original}}</h4>
+                <h4 class="card-text">Translated: {{translation.translated}}</h4> 
               </div>
             </div>
           </div>
